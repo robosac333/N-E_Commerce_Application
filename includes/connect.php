@@ -1,6 +1,5 @@
 
 <?php
-require 'vendor/autoload.php';
 
 use Aws\SecretsManager\SecretsManagerClient;
 use Aws\Exception\AwsException;
