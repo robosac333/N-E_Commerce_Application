@@ -10,8 +10,8 @@ session_start();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ecommerce Admin Login</title>
-    <link rel="stylesheet" href="../assets/css/bootstrap.css" />
-    <link rel="stylesheet" href="../assets/css/main.css" />
+    <link rel="stylesheet" href="https://d3vbl7vqzfz11g.cloudfront.net/assets/css/bootstrap.css" />
+    <link rel="stylesheet" href="https://d3vbl7vqzfz11g.cloudfront.net/assets/css/main.css" />
 </head>
 
 <body>
