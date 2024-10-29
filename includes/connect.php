@@ -1,11 +1,5 @@
 <?php 
-// $con=mysqli_connect('localhost','root','','ecommerce_1');
-//$con = new mysqli('rds-mydbinstance-ohzhgoflg8ov.ctq0oqggufq5.us-east-2.rds.amazonaws.com','admin',"56Z\>'sFTBn<t-o9",'ecommerce_1');
-//if(!$con){
-  //  die(mysqli_error($con));
-//}
-
-//require '../vendor/autoload.php';
+// Include the AWS SDK for PHP
 require __DIR__ . '/../vendor/autoload.php';
 use Aws\SecretsManager\SecretsManagerClient;
 use Aws\Exception\AwsException;
@@ -32,29 +26,37 @@ function getSecret($secretName) {
     }
 }
 
-// Retrieve the secret
+// Retrieve the RDS secret for database credentials
 $secretName = 'MyRDSSecret'; // Replace with your secret name
 $secret = getSecret($secretName);
 
-if ($secret) {
+// Retrieve the CA certificate
+$caSecretName = 'MyRDSCACert'; // Replace with your CA certificate secret name
+$caSecret = getSecret($caSecretName);
+$caCertificate = $caSecret['SecretString']; // Assuming the secret is stored as plain string
+
+if ($secret && $caCertificate) {
     // Database connection details
     $username = $secret['username'];
     $password = $secret['password'];
-    $dbHost = "rds-mydbinstance-ohzhgoflg8ov.ctq0oqggufq5.us-east-2.rds.amazonaws.com";
+    $dbHost = $secret['endpoint'];
     $dbName = "ecommerce_1";
 
     // Create connection
-    $con = new mysqli($dbHost, $username, $password, $dbName);
+    $con = new mysqli($dbHost, $username, $password, $dbName, null, null, [
+        // Set SSL options
+        'ssl' => [
+            'verify_server_cert' => true,
+            'CAfile' => 'data://text/plain;base64,' . base64_encode($caCertificate)
+        ]
+    ]);
 
     // Check connection
     if ($con->connect_error) {
         die("Connection failed: " . $con->connect_error);
     }
-    echo "Connected successfully to the database.";
+    echo "Connected successfully to the database with SSL.";
 } else {
-    echo "Failed to retrieve database credentials.";
+    echo "Failed to retrieve database credentials or CA certificate.";
 }
-
-
-
 ?>
