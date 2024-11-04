@@ -1,13 +1,13 @@
-<?php 
+<?php
 // Include the AWS SDK for PHP
-require __DIR__ . '/../vendor/autoload.php';
+require _DIR_ . '/../vendor/autoload.php';
 use Aws\SecretsManager\SecretsManagerClient;
 use Aws\Exception\AwsException;
 
 function getSecret($secretName) {
     $client = new SecretsManagerClient([
         'version' => 'latest',
-        'region' => 'us-east-2' // e.g., 'us-east-1'
+        'region' => 'us-east-1'
     ]);
 
     try {
@@ -42,19 +42,29 @@ if ($secret && $caCertificate) {
     $dbHost = $secret['endpoint'];
     $dbName = "ecommerce_1";
 
-    // Create connection
-    $con = new mysqli($dbHost, $username, $password, $dbName, null, null, [
-        // Set SSL options
-        'ssl' => [
-            'verify_server_cert' => true,
-            'CAfile' => 'data://text/plain;base64,' . base64_encode($caCertificate)
-        ]
-    ]);
+    // Path to store CA certificate temporarily
+    $caCertFilePath = '/tmp/ca-cert.pem';
+    file_put_contents($caCertFilePath, $caCertificate);
+
+    // Create connection without SSL
+    $con = new mysqli($dbHost, $username, $password, $dbName);
 
     // Check connection
     if ($con->connect_error) {
         die("Connection failed: " . $con->connect_error);
     }
+
+    // Set SSL options for the connection
+    $con->ssl_set(null, null, $caCertFilePath, null, null);
+
+    // Verify server certificate
+    $con->options(MYSQLI_OPT_SSL_VERIFY_SERVER_CERT, true);
+
+    // Reconnect with SSL
+    if (!$con->real_connect($dbHost, $username, $password, $dbName, 3306, null, MYSQLI_CLIENT_SSL)) {
+        die("SSL Connection failed: " . $con->connect_error);
+    }
+
     echo "Connected successfully to the database with SSL.";
 } else {
     echo "Failed to retrieve database credentials or CA certificate.";
