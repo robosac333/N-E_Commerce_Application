@@ -1,4 +1,4 @@
-# E-Commerce-PHP-MySQL-
+# E-Commerce-AWS deployment
 In this project, I deployed a shopping website using a 3-tier architecture on AWS, ensuring high availability, scalability, and security.
 
 ## Architecture Overview:
@@ -31,7 +31,7 @@ Integrated Amazon CloudFront to serve static content from S3 buckets, reducing l
 
  This architecture design ensures that the shopping website can handle high traffic volumes, maintain high availability, and provide a secure and fast shopping experience for users.
 
-
+<p align="center"><img src="./ui/architecture.jpeg" width="100%" alt="View"></p>
 <p align="center"><img src="./ui/Ecommerce-Home-Page.png" width="100%" alt="View"></p>
 <p align="center"><img src="./ui/Ecommerce-Products.png" width="100%" alt="View"></p>
 <p align="center"><img src="./ui/Ecommerce-Cart-Details-Page.png" width="100%" alt="View"></p>
