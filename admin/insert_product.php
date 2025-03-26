@@ -41,8 +41,8 @@ if(isset($_POST['insert_product'])){
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Insert Products - Admin Dashboard</title>
-    <link rel="stylesheet" href="https://d2ley313950p8x.cloudfront.net/assets/css/bootstrap.css" />
-    <link rel="stylesheet" href="https://d2ley313950p8x.cloudfront.net/assets/css/main.css" />
+    <link rel="stylesheet" href="https://d2b4ss7zr3jw0c.cloudfront.net/assets/css/bootstrap.css" />
+    <link rel="stylesheet" href="https://d2b4ss7zr3jw0c.cloudfront.net/assets/css/main.css" />
 </head>
 
 <body>

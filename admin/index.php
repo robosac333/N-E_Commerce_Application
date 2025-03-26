@@ -20,8 +20,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ecommerce Admin Dashboard</title>
-    <link rel="stylesheet" href="https://d2ley313950p8x.cloudfront.net/assets/css/bootstrap.css" />
-    <link rel="stylesheet" href="https://d2ley313950p8x.cloudfront.net/assets/css/main.css" />
+    <link rel="stylesheet" href="https://d2b4ss7zr3jw0c.cloudfront.net/assets/css/bootstrap.css" />
+    <link rel="stylesheet" href="https://d2b4ss7zr3jw0c.cloudfront.net/assets/css/main.css" />
 </head>
 
 <body>
@@ -180,7 +180,7 @@
     </div> -->
     <!-- End Footer -->
 
-    <script src="https://d2ley313950p8x.cloudfront.net/assets/js/bootstrap.bundle.js"></script>
+    <script src="https://d2b4ss7zr3jw0c.cloudfront.net/assets/js/bootstrap.bundle.js"></script>
 </body>
 
 </html>
